@@ -5,7 +5,9 @@ Sistema em HTML, CSS e JavaScript, com sincronização em nuvem via Firebase (Fi
 Abra dist/index.html no navegador. Para endereço estável local, execute na pasta dist: python -m http.server 8080 e acesse http://localhost:8080.
 
 ## Publicar atualizações no GitHub
-Execute `npm run deploy` na raiz do projeto para enviar (git add + commit + push) as alterações para https://github.com/worldinovabr/pcpm. O GitHub Actions publica automaticamente dist/ em https://worldinovabr.github.io/pcpm/ a cada push na branch principal.
+Execute `npm run deploy` na raiz do projeto para enviar (git add + commit + push) as alterações para https://github.com/worldinovabr/pcpm. Um workflow do GitHub Actions publica automaticamente dist/ na branch `gh-pages` a cada push na branch principal.
+
+Na primeira vez, é necessário um passo manual (restrição do próprio GitHub: só o dono do repositório pode ativar o Pages, não é possível via token automático): acesse Settings > Pages do repositório, em "Source" escolha "Deploy from a branch", selecione a branch `gh-pages` e a pasta `/ (root)`, depois salve. A partir daí, o site fica disponível em https://worldinovabr.github.io/pcpm/ e se atualiza sozinho a cada `npm run deploy`.
 
 ## Fluxo
 1. Confira os 245 itens importados (A conferir).

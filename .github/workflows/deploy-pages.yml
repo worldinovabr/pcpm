@@ -1,14 +1,19 @@
 name: Deploy to GitHub Pages
 
+# Publica dist/ na branch "gh-pages" (método clássico do GitHub Pages),
+# em vez do método "Source: GitHub Actions". Mesmo assim, a primeira
+# ativação do GitHub Pages exige 1 clique manual nas configurações do
+# repositório (Settings > Pages > Source > Deploy from a branch > gh-pages),
+# pois o GitHub não permite habilitar o Pages de um repositório pela
+# primeira vez usando o token automático do workflow.
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
@@ -17,18 +22,12 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Configurar GitHub Pages
-        uses: actions/configure-pages@v5
-      - name: Empacotar site (dist/)
-        uses: actions/upload-pages-artifact@v3
+      - name: Publicar dist/ na branch gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: dist
-      - name: Publicar no GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
+          publish_branch: gh-pages

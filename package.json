@@ -1,0 +1,10 @@
+{
+  "name": "pcp-weslei",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PCP Weslei - sistema de PCP em HTML/CSS/JS com sincronização Firebase, publicado via GitHub Pages.",
+  "scripts": {
+    "test": "node check.cjs",
+    "deploy": "node deploy.js"
+  }
+}

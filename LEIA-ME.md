@@ -4,6 +4,9 @@ Sistema em HTML, CSS e JavaScript, com sincronização em nuvem via Firebase (Fi
 ## Executar
 Abra dist/index.html no navegador. Para endereço estável local, execute na pasta dist: python -m http.server 8080 e acesse http://localhost:8080.
 
+## Publicar atualizações no GitHub
+Execute `npm run deploy` na raiz do projeto para enviar (git add + commit + push) as alterações para https://github.com/worldinovabr/pcpm. O GitHub Actions publica automaticamente dist/ em https://worldinovabr.github.io/pcpm/ a cada push na branch principal.
+
 ## Fluxo
 1. Confira os 245 itens importados (A conferir).
 2. Valide centro de produção e quantidades; cadastre novos pedidos.
@@ -29,4 +32,5 @@ As 8 horas iniciais por centro são uma configuração padrão editável, não u
 - dist/seed.js: carteira inicial
 - source.json: registros originais extraídos das abas visíveis
 - firestore.rules: Regras de Segurança do Firestore e instruções de aplicação
-- check.cjs: verificação dos cálculos com Node.js (execute node check.cjs na raiz)
+- package.json / deploy.js: comando `npm run deploy` para enviar atualizações ao GitHub
+- check.cjs: verificação dos cálculos com Node.js (execute node check.cjs na raiz, ou npm test)

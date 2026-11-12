@@ -1,0 +1,33 @@
+rules_version = '2';
+
+// Regras de Segurança do Firestore para o projeto PCP Weslei (pcpm-98551).
+//
+// Este app NÃO tem login de usuário. Por isso estas regras liberam leitura e
+// escrita apenas do único documento usado pelo sistema
+// (workspaces/pcp-weslei-v1) e bloqueiam qualquer outro caminho do banco.
+// Qualquer pessoa que tenha a URL do app poderá ler/gravar esse documento,
+// pois não há autenticação - o mesmo nível de confiança que já existia quando
+// os dados ficavam só no localStorage do navegador.
+//
+// Como aplicar:
+// 1. Acesse https://console.firebase.google.com/project/pcpm-98551/firestore/rules
+// 2. Cole o conteúdo abaixo e publique.
+// 3. Se o Firestore do projeto ainda não existir, crie-o antes em
+//    https://console.firebase.google.com/project/pcpm-98551/firestore (modo nativo).
+//
+// Recomendado para reforçar a segurança, se necessário no futuro:
+// - Ativar o Firebase App Check para o app web.
+// - Restringir a chave de API (apiKey) por domínio em
+//   https://console.cloud.google.com/apis/credentials?project=pcpm-98551
+// - Adicionar Firebase Authentication e exigir "request.auth != null" abaixo,
+//   caso o sistema passe a ter múltiplos usuários/empresas.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /workspaces/pcp-weslei-v1 {
+      allow read, write: if true;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
